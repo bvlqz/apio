@@ -17,6 +17,8 @@ include_directories(vendor/imgui)
 
 add_executable(apio 
     src/main.cpp
+    src/window.h
+    src/window.cpp
     vendor/imgui/imconfig.h
     vendor/imgui/imgui.cpp
     vendor/imgui/imgui.h
