@@ -2,7 +2,7 @@
 
 Window::Window()
 {
-    
+    currentEditor = new Editor;
     io = nullptr;
 }
 
@@ -11,6 +11,9 @@ Window::~Window()
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
+
+    delete currentEditor;
+
     SDL_GL_DeleteContext(glContext);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -120,6 +123,8 @@ void Window::render()
                 std::replace(path.begin(), path.end(), '\\', '/');
 
                 std::cout << "Dropped path: " << path << std::endl;
+                currentEditor->setPath(path.c_str());
+                currentEditor->open();
 
                 SDL_free(event.drop.file);
 
@@ -134,6 +139,9 @@ void Window::render()
         ImGui::NewFrame();
 
         ImGui::ShowDemoWindow(&show_demo_window);
+
+
+        currentEditor->draw();
 
         // Rendering
         ImVec4 clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);

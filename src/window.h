@@ -14,6 +14,8 @@
 #include <chrono>
 #include <thread>
 
+#include "editor.h"
+
 class Window {
 public:
     Window();
@@ -24,6 +26,7 @@ public:
     
     SDL_Window* window;
     ImGuiIO* io;
+    Editor* currentEditor;
 
     bool setupSDL();
     void setupGLSL(); 
