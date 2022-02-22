@@ -19,6 +19,8 @@ add_executable(apio
     src/main.cpp
     src/window.h
     src/window.cpp
+    src/editor.h
+    src/editor.cpp
     vendor/imgui/imconfig.h
     vendor/imgui/imgui.cpp
     vendor/imgui/imgui.h
