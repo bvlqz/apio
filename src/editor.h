@@ -1,5 +1,8 @@
 #include "imgui.h"
 #include <fstream>
+#include <iostream>
+
+#include <sys/stat.h>
 
 class Editor {
 public:
@@ -17,4 +20,5 @@ private:
     char pathBuf[1024] = ""; 
     char tabNameBuf[256] = "New";
     char contentBuf[1024 * 16] = "";
+    char permissions[9] = "";
 };

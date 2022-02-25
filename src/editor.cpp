@@ -39,7 +39,7 @@ void Editor::draw()
 
     // ImGui::Text("Keys mods: %s%s%s%s", io.KeyCtrl ? "CTRL " : "", io.KeyShift ? "SHIFT " : "", io.KeyAlt ? "ALT " : "", io.KeySuper ? "SUPER " : "");
     ImGui::InputTextMultiline("##source", contentBuf, IM_ARRAYSIZE(contentBuf), ImVec2(-FLT_MIN, -FLT_MIN - ImGui::GetTextLineHeight() - 10), flags);
-
+    
     ImGui::Text("%s", permissions); 
 
     if (userWantsEditPath)
@@ -57,7 +57,7 @@ void Editor::draw()
             userWantsEditPath = true;
         }
     }
-
+    
     ImGui::End();
 }
 
@@ -73,6 +73,26 @@ bool Editor::save()
 
 bool Editor::open()
 {
+
+    struct stat st;
+
+    if(stat(pathBuf, &st) == 0){
+        mode_t permission = st.st_mode;
+        
+        permissions[0] = (permission & S_IRUSR) ? 'r' : '-';
+        permissions[1] = (permission & S_IWUSR) ? 'w' : '-';
+        permissions[2] = (permission & S_IXUSR) ? 'x' : '-';
+        permissions[3] = (permission & S_IRGRP) ? 'r' : '-';
+        permissions[4] = (permission & S_IWGRP) ? 'w' : '-';
+        permissions[5] = (permission & S_IXGRP) ? 'x' : '-';
+        permissions[6] = (permission & S_IROTH) ? 'r' : '-';
+        permissions[7] = (permission & S_IWOTH) ? 'w' : '-';
+        permissions[8] = (permission & S_IXOTH) ? 'x' : '-';
+    } else {
+        // error
+    }
+
+
     std::string line;
     std::ifstream stream;
     stream.open(pathBuf);
