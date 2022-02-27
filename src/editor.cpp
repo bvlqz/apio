@@ -9,7 +9,6 @@ void Editor::draw()
 {
     static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
     static ImGuiWindowFlags windowFlags = 0;
-    static bool userWantsEditPath = false;
 
     windowFlags |= ImGuiWindowFlags_NoCollapse;
     windowFlags |= ImGuiWindowFlags_NoResize;
