@@ -12,8 +12,21 @@ void Editor::draw()
     static bool userWantsEditPath = false;
 
     windowFlags |= ImGuiWindowFlags_NoCollapse;
-    windowFlags |= ImGuiWindowFlags_MenuBar;
+    windowFlags |= ImGuiWindowFlags_NoResize;
+    windowFlags |= ImGuiWindowFlags_NoDecoration;
+    windowFlags |= ImGuiWindowFlags_NoMove;
     windowFlags |= ImGuiWindowFlags_NoTitleBar;
+
+    const ImGuiViewport* viewport = ImGui::GetMainViewport();
+    
+    ImVec2 editorSize = viewport->Size;
+    editorSize[1] = editorSize[1] - 18;
+
+    ImVec2 editorPosition = viewport->Pos;
+    editorPosition[1] = editorPosition[1] + 18;
+
+    ImGui::SetNextWindowPos(editorPosition);
+    ImGui::SetNextWindowSize(editorSize);
 
     ImGui::Begin("Text Editor", NULL, windowFlags); 
 
