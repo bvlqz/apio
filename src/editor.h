@@ -10,6 +10,9 @@ public:
     // ~Editor();
     void draw();
 
+    void drawPermissions(); 
+    void drawCurrentFile(); 
+
     void setFileName();
     
     bool setPath(const char * path);
@@ -20,5 +23,5 @@ private:
     char pathBuf[1024] = ""; 
     char tabNameBuf[256] = "New";
     char contentBuf[1024 * 16] = "";
-    char permissions[9] = "";
+    char permissions[10] = "---------";
 };

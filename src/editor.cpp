@@ -35,42 +35,23 @@ void Editor::draw()
         if (ImGui::IsKeyDown(ImGuiKey_S)) save();
     }
 
-    if (ImGui::BeginMenuBar())
-    {
-        if (ImGui::BeginMenu("File"))
-        {
-            if (ImGui::MenuItem("Save", "Ctrl+S")) {save();}
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Edit"))
-        {
-            ImGui::EndMenu();
-        }
-        ImGui::EndMenuBar();
-    }
-
     // ImGui::Text("Keys mods: %s%s%s%s", io.KeyCtrl ? "CTRL " : "", io.KeyShift ? "SHIFT " : "", io.KeyAlt ? "ALT " : "", io.KeySuper ? "SUPER " : "");
-    ImGui::InputTextMultiline("##source", contentBuf, IM_ARRAYSIZE(contentBuf), ImVec2(-FLT_MIN, -FLT_MIN - ImGui::GetTextLineHeight() - 10), flags);
-    
-    ImGui::Text("%s", permissions); 
-
-    if (userWantsEditPath)
-    {
-        ImGui::InputText("##FileName", pathBuf, IM_ARRAYSIZE(pathBuf));
-        ImGui::SameLine();
-        if (ImGui::Button("OK"))
-        {
-            userWantsEditPath = false;
-        }
-    } else {
-        ImGui::Text("%s", pathBuf);
-        if (ImGui::IsMouseDoubleClicked(0))
-        {
-            userWantsEditPath = true;
-        }
-    }
-    
+    ImGui::InputTextMultiline("##source", contentBuf, IM_ARRAYSIZE(contentBuf), ImVec2(-FLT_MIN, -FLT_MIN), flags);
     ImGui::End();
+}
+
+
+void Editor::drawCurrentFile()
+{
+    ImGui::Text("%s", pathBuf);
+}
+
+
+void Editor::drawPermissions()
+{
+    ImGui::SameLine(); 
+    ImGui::SameLine(ImGui::GetWindowWidth() - 80);
+    ImGui::Text("%s", permissions);
 }
 
 bool Editor::save()
