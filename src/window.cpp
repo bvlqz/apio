@@ -85,6 +85,20 @@ void Window::setupImGui()
     ImGui_ImplOpenGL3_Init(glslVersion.c_str());
 }
 
+void Window::setupImGuiStyle(){
+    // #define DARKGREY ImVec4(0.16f, 0.17f, 0.20f, 1.00f)
+
+    ImGuiStyle* style = &ImGui::GetStyle();
+
+    // style->Colors[ImGuiCol_Button] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
+    style->Colors[ImGuiCol_WindowBg] = ImVec4(0.16f, 0.17f, 0.20f, 0.80f);
+    style->Colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.17f, 0.20f, 1.00f);
+
+    io->Fonts->AddFontFromMemoryCompressedTTF(JetBrainsMono_compressed_data, JetBrainsMono_compressed_size, 13);
+
+
+}
+
 void Window::render()
 {
     // Main loop

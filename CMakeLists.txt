@@ -21,6 +21,7 @@ add_executable(apio
     src/window.cpp
     src/editor.h
     src/editor.cpp
+    src/fonts/JetBrainsMono.cpp
     vendor/imgui/imconfig.h
     vendor/imgui/imgui.cpp
     vendor/imgui/imgui.h

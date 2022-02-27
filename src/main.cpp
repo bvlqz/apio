@@ -7,6 +7,7 @@ int main(int, char**)
     w.setupGLSL();
     w.setupWindow();
     w.setupImGui();
+    w.setupImGuiStyle();
     w.render();
     return 0;
 }

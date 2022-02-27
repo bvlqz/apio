@@ -14,6 +14,8 @@
 #include <chrono>
 #include <thread>
 
+#include "fonts/JetBrainsMono.cpp"
+
 #include "editor.h"
 
 class Window {
@@ -32,6 +34,7 @@ public:
     void setupGLSL(); 
     void setupWindow(); 
     void setupImGui();
+    void setupImGuiStyle(); 
 
     void render();
 };
