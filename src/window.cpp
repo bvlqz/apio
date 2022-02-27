@@ -141,6 +141,13 @@ void Window::render()
 
 
 
+        if (ImGui::BeginMainMenuBar())
+        {
+            currentEditor->drawCurrentFile(); 
+            currentEditor->drawPermissions();
+            ImGui::EndMainMenuBar();
+        }
+
 
         currentEditor->draw();
 
