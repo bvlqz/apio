@@ -89,7 +89,6 @@ void Window::render()
 {
     // Main loop
     bool done = false;
-    bool show_demo_window = true;
     bool windowIsMinimized = false; 
 
     while (!done)
@@ -138,7 +137,9 @@ void Window::render()
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::ShowDemoWindow(&show_demo_window);
+        // ImGui::ShowDemoWindow();
+
+
 
 
         currentEditor->draw();
