@@ -135,6 +135,10 @@ void Window::render()
                 std::string path = event.drop.file;
                 std::replace(path.begin(), path.end(), '\\', '/');
 
+                size_t found = path.find_last_of("/\\");
+                std::string filename = path.substr(found + 1);
+                SDL_SetWindowTitle(window, filename.c_str());
+
                 std::cout << "Dropped path: " << path << std::endl;
                 currentEditor->setPath(path.c_str());
                 currentEditor->open();
