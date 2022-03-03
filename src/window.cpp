@@ -62,11 +62,24 @@ void Window::setupGLSL()
 // Create window with graphics context
 void Window::setupWindow()
 {
+    int windowWidth, windowHeight;
+    
+    #ifdef APIO_DEVELOPMENT_BUILD
+        windowWidth = 1000;
+        windowHeight = 600;
+    #else
+        windowWidth = 480;
+        windowHeight = 240;
+    #endif
+
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    window = SDL_CreateWindow("Apio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, window_flags);
+
+
+    window = SDL_CreateWindow("Apio", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, window_flags);
+    
     glContext = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, glContext);
     SDL_GL_SetSwapInterval(1); // Enable vsync
