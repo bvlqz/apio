@@ -168,7 +168,7 @@ void Window::render()
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
-        // ImGui::ShowDemoWindow();
+        
 
 
 
@@ -181,6 +181,9 @@ void Window::render()
 
 
         currentEditor->draw();
+        #ifdef APIO_DEVELOPMENT_BUILD
+        currentEditor->drawDebug();
+        #endif
 
         // Rendering
         ImVec4 clear_color = ImVec4(0.1f, 0.1f, 0.1f, 1.00f);

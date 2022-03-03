@@ -9,6 +9,7 @@ public:
     Editor();
     // ~Editor();
     void draw();
+    void drawDebug();
 
     void drawPermissions(); 
     void drawCurrentFile(); 

@@ -5,11 +5,31 @@ Editor::Editor()
 
 }
 
+void Editor::drawDebug()
+{
+    ImGui::ShowDemoWindow();
+    ImGui::Begin("Debug", NULL, 0); 
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui::Text("Keys mods: %s%s%s%s", io.KeyCtrl ? "CTRL " : "", io.KeyShift ? "SHIFT " : "", io.KeyAlt ? "ALT " : "", io.KeySuper ? "SUPER " : "");
+    ImGui::Text("Keys down:");
+    const ImGuiKey key_first = ImGuiKey_NamedKey_BEGIN;
+    for (ImGuiKey key = key_first; key < ImGuiKey_COUNT; key++)
+    { 
+        if (ImGui::IsKeyDown(key))
+        { 
+            ImGui::SameLine(); 
+            ImGui::Text("\"%s\" %d", ImGui::GetKeyName(key), key);
+        } 
+    }
+    ImGui::End();
+}
+
 void Editor::draw()
 {
     static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput;
     static ImGuiWindowFlags windowFlags = 0;
 
+    #ifndef APIO_DEVELOPMENT_BUILD
     windowFlags |= ImGuiWindowFlags_NoCollapse;
     windowFlags |= ImGuiWindowFlags_NoResize;
     windowFlags |= ImGuiWindowFlags_NoDecoration;
@@ -23,11 +43,14 @@ void Editor::draw()
 
     ImVec2 editorPosition = viewport->Pos;
     editorPosition[1] = editorPosition[1] + 18;
-
+    
     ImGui::SetNextWindowPos(editorPosition);
     ImGui::SetNextWindowSize(editorSize);
+    
+    #endif
 
     ImGui::Begin("Text Editor", NULL, windowFlags); 
+    
 
     ImGuiIO& io = ImGui::GetIO();
     if (io.KeyCtrl || io.KeySuper)
@@ -35,7 +58,6 @@ void Editor::draw()
         if (ImGui::IsKeyDown(ImGuiKey_S)) save();
     }
 
-    // ImGui::Text("Keys mods: %s%s%s%s", io.KeyCtrl ? "CTRL " : "", io.KeyShift ? "SHIFT " : "", io.KeyAlt ? "ALT " : "", io.KeySuper ? "SUPER " : "");
     ImGui::InputTextMultiline("##source", contentBuf, IM_ARRAYSIZE(contentBuf), ImVec2(-FLT_MIN, -FLT_MIN), flags);
     ImGui::End();
 }
@@ -97,6 +119,8 @@ bool Editor::open()
         std::istreambuf_iterator<char>());
 
     strncpy(contentBuf, contents.c_str(), sizeof(contentBuf));
+
+
 
     return true;
 }
