@@ -6,8 +6,12 @@ project(apio)
 add_definitions("-Wall")
 add_definitions("-Wextra")
 add_definitions("-pedantic") 
-# Conversion Warnings
 add_definitions("-Wconversion") 
+
+option(APIO_DEVELOPMENT_BUILD "Development Build" OFF)
+if (APIO_DEVELOPMENT_BUILD)
+    add_definitions(-DAPIO_DEVELOPMENT_BUILD)
+endif()
 
 find_package(OpenGL REQUIRED)
 find_package(SDL2 REQUIRED)
