@@ -78,6 +78,8 @@ void Editor::drawPermissions()
 
 bool Editor::save()
 {
+    if ('\0' == pathBuf[0]) return false;
+
     std::ofstream stream;
     stream.open(pathBuf);
     if( !stream ) return false;
